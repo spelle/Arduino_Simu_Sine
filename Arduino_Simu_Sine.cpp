@@ -9,7 +9,7 @@
 
 #define SIMULATIONSINE_NB_STEP 128
 
-unsigned int simulationSine[SIMULATIONSINE_NB_STEP] = {
+static unsigned int simulationSine[SIMULATIONSINE_NB_STEP] = {
 		0x600,0x64b,0x697,0x6e1,0x72c,0x775,0x7be,0x805,
 		0x84c,0x891,0x8d4,0x916,0x955,0x993,0x9ce,0xa08,
 		0xa3e,0xa72,0xaa3,0xad2,0xafd,0xb25,0xb4b,0xb6d,
@@ -30,14 +30,18 @@ unsigned int simulationSine[SIMULATIONSINE_NB_STEP] = {
 
 unsigned int getSineValue( )
 {
-	static unsigned int uiSineIndex = 0 ;
+	static unsigned char ucIndex = 0 ;
 
-	unsigned int uiRet = simulationSine[uiSineIndex] ;
+	unsigned int uiRetVal = simulationSine[ucIndex] ;
 
-	if( SIMULATIONSINE_NB_STEP <= uiSineIndex )
-		uiSineIndex++ ;
+	if( SIMULATIONSINE_NB_STEP > ucIndex )
+	{
+		ucIndex ++  ;
+	}
 	else
-		uiSineIndex = 0 ;
+	{
+		ucIndex = 0 ;
+	}
 
-	return uiRet ;
+	return uiRetVal ;
 }
